@@ -5,8 +5,10 @@
  */
 package gui;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.awt.Insets;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -16,6 +18,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.imageio.ImageIO;
+import javax.swing.border.EmptyBorder;
 import main.Manager;
 
 /**
@@ -43,8 +46,8 @@ public class GUIJFrame extends javax.swing.JFrame {
         BufferedImage bgImage = null;
         BufferedImage voiceImage = null;
         try {
-            bgImage = ImageIO.read(new File("D:\\i am vadry\\SCARI\\WordSenseDisambiguation18\\src\\assets\\img\\hero_medium.jpg"));
-            voiceImage = ImageIO.read(new File("D:\\i am vadry\\SCARI\\WordSenseDisambiguation18\\src\\assets\\img\\wave_form_medium.png"));
+            bgImage = ImageIO.read(new File("C:\\Users\\ASimionescu\\Documents\\NetBeansProjects\\SCARI\\WordSenseDisambiguation18\\src\\assets\\img\\hero_medium.jpg"));
+            voiceImage = ImageIO.read(new File("C:\\Users\\ASimionescu\\Documents\\NetBeansProjects\\SCARI\\WordSenseDisambiguation18\\src\\assets\\img\\wave_form_medium.png"));
         } catch (IOException e) {
             System.out.println("Image read failed!");
         }
@@ -62,6 +65,7 @@ public class GUIJFrame extends javax.swing.JFrame {
         jTextField2 = new javax.swing.JTextField();
         ContinueBtn1 = new javax.swing.JButton();
         Step2Pannel1 = new javax.swing.JPanel();
+        WordsPanel = new javax.swing.JPanel();
         WordBtn4 = new javax.swing.JButton();
         WordBtn5 = new javax.swing.JButton();
         WordBtn6 = new javax.swing.JButton();
@@ -182,7 +186,35 @@ public class GUIJFrame extends javax.swing.JFrame {
 
         Step2Pannel1.setBackground(new java.awt.Color(204, 204, 0));
         Step2Pannel1.setOpaque(false);
-        Step2Pannel1.setLayout(new GridLayout(1, 0));
+        javax.swing.GroupLayout Step2Pannel1Layout = new javax.swing.GroupLayout(Step2Pannel1);
+        Step2Pannel1.setLayout(Step2Pannel1Layout);
+        Step2Pannel1Layout.setHorizontalGroup(
+            Step2Pannel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(Step2Pannel1Layout.createSequentialGroup()
+                .addGroup(Step2Pannel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(Step2Pannel1Layout.createSequentialGroup()
+                        .addComponent(WordsPanel)
+                        )
+                    .addGroup(Step2Pannel1Layout.createSequentialGroup()
+                        .addGap(142, 142, 142)
+                        .addComponent(BackBtn1)))
+                .addContainerGap(125, Short.MAX_VALUE))
+        );
+        Step2Pannel1Layout.setVerticalGroup(
+            Step2Pannel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(Step2Pannel1Layout.createSequentialGroup()
+                .addGap(42, 42, 42)
+                .addGroup(Step2Pannel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(WordsPanel, 30, 30, 30)
+                    )
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(BackBtn1)
+                .addContainerGap())
+        );
+        
+        WordsPanel.setPreferredSize(new Dimension(600, 30));
+        WordsPanel.setLayout(new GridLayout(1, 0));
+        WordsPanel.setOpaque(false);
 
         WordBtn4.setText("jButton2");
 
@@ -202,19 +234,19 @@ public class GUIJFrame extends javax.swing.JFrame {
         ContentPanel1Layout.setHorizontalGroup(
             ContentPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(ContentPanel1Layout.createSequentialGroup()
-                .addContainerGap(265, Short.MAX_VALUE)
-                .addComponent(Step1Panel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(300, Short.MAX_VALUE)
+                .addComponent(Step1Panel1, 300, 300, 300)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(Step2Pannel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(265, Short.MAX_VALUE))
+                .addComponent(Step2Pannel1, 600, 600, 600)
+                .addContainerGap(300, Short.MAX_VALUE))
         );
         ContentPanel1Layout.setVerticalGroup(
             ContentPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ContentPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(ContentPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(Step2Pannel1, 50, 50, 50)
-                    .addComponent(Step1Panel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(Step2Pannel1, 160, 160, 160)
+                    .addComponent(Step1Panel1, 160, 160, 160))
                 .addContainerGap())
         );
         ContentPanel1.setOpaque(false);
@@ -344,13 +376,14 @@ public class GUIJFrame extends javax.swing.JFrame {
     private javax.swing.JLabel TitleText1;
     private javax.swing.JPanel TopBar1;
     private ImagePanel VoicePanel1;
-    private List<javax.swing.JButton> WordBtns;
+    private List<RoundButton> WordBtns;
     private javax.swing.JButton WordBtn4;
     private javax.swing.JButton WordBtn5;
     private javax.swing.JButton WordBtn6;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JTextField jTextField2;
     private Manager manager = null;
+    private javax.swing.JPanel WordsPanel;
     // End of variables declaration                   
 
     public javax.swing.JButton getContinueBtn() {
@@ -393,20 +426,31 @@ public class GUIJFrame extends javax.swing.JFrame {
         inputTextValue = inputText;
         String[] arr = inputText.split(" ");    
         WordBtns.clear();
-        Step2Pannel1.setPreferredSize(new Dimension(400, 300));
-        Step2Pannel1.removeAll();
+        
+        WordsPanel.removeAll();
         int count=0;
         for ( String ss : arr) {
             final int cindex = count;
             count++;
-            //RoundButton btn = new RoundButton(ss, 5);
-            javax.swing.JButton btn = new javax.swing.JButton(ss);
+            RoundButton btn = new RoundButton(ss, 5);
+            btn.setBorder( new EmptyBorder(1, 1, 1, 1) );
+            btn.setMargin( new Insets(1, 1, 1, 1) );
             btn.addActionListener(new ActionListener()
             {
                 private int index;
                 @Override
                 public void actionPerformed(ActionEvent e)
                 {
+                    Object source = e.getSource();
+                    if (source instanceof RoundButton) {
+                        // reset all
+                        for (RoundButton b:WordBtns)
+                        {
+                            b.setFocusPainted(false);
+                        }
+                        RoundButton btn_this = (RoundButton)source;
+                        btn_this.setFocusPainted(true);
+                    }
                     index=cindex;
                     String butSrcTxt = e.getActionCommand();
                     String definition = manager.disambiguation(inputTextValue, index);
@@ -416,10 +460,10 @@ public class GUIJFrame extends javax.swing.JFrame {
             btn.setVisible(true);
             System.out.println(ss);
             WordBtns.add(btn);
-            Step2Pannel1.add(btn);
+            WordsPanel.add(btn);
         }
-        Step2Pannel1.repaint();
-        Step2Pannel1.revalidate();
+        WordsPanel.repaint();
+        WordsPanel.revalidate();
     }
     
 }
