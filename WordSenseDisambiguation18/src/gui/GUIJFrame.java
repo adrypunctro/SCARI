@@ -81,6 +81,7 @@ public class GUIJFrame extends javax.swing.JFrame {
         WordBtns = new ArrayList<>();
         ContinueBtn1.setCursor(new Cursor(Cursor.HAND_CURSOR));
         BackBtn1.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        WindowSize = new javax.swing.JComboBox<>();
         
         TitleText1.setForeground(new java.awt.Color(220, 220, 220));
         TitleText1.setText("Word Sense Disambiguation");
@@ -201,7 +202,10 @@ public class GUIJFrame extends javax.swing.JFrame {
                         .addComponent(WordsPanel)
                         )
                     .addGroup(Step2Pannel1Layout.createSequentialGroup()
-                        .addComponent(BackBtn1)))
+                        .addComponent(BackBtn1)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(WindowSize, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                )
                 .addContainerGap(125, Short.MAX_VALUE))
         );
         Step2Pannel1Layout.setVerticalGroup(
@@ -212,9 +216,24 @@ public class GUIJFrame extends javax.swing.JFrame {
                     .addComponent(WordsPanel, 30, 30, 30)
                     )
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(BackBtn1)
+                .addGroup(Step2Pannel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(BackBtn1)
+                    .addComponent(WindowSize, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
+        
+        WindowSize.setModel(new javax.swing.DefaultComboBoxModel<>(new Integer[] { 3, 5, 7, 9 }));
+        WindowSize.addActionListener (new ActionListener () {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Integer winSize = (Integer)WindowSize.getSelectedItem();
+                performDisamb(inputTextValue, winSize);
+                if (currentIndex != null)
+                {
+                    dis(currentIndex, winSize);
+                }
+            }
+        });
         
         WordsPanel.setPreferredSize(new Dimension(600, 30));
         WordsPanel.setOpaque(false);
@@ -297,6 +316,83 @@ public class GUIJFrame extends javax.swing.JFrame {
     
     }// </editor-fold>                        
 
+    public void dis(int index, int windowSize)
+    {
+        RoundButton btn_this = WordBtns.get(index);
+        // reset all
+        int i=0;
+        for (RoundButton b:WordBtns)
+        {
+            b.setFocusPainted(false);
+            b.setBackground(Color.WHITE);
+            if (i>=index-(windowSize/2) && i<=index+(windowSize/2))
+            {
+                b.setBackground(Color.YELLOW);
+            }
+            i++;
+        }
+        btn_this.setBackground(Color.CYAN);
+        
+        String definition = manager.disambiguation(inputTextValue, index, windowSize);
+        Definition.setText(definition);
+        Definition.setVisible(true);
+    }
+    
+    public void performDisamb(String inputTextValue, int windowSize)
+    {
+        String[] arr = inputTextValue.split(" ");    
+        WordBtns.clear();
+        
+        Definition.setText("");
+        WordsPanel.removeAll();
+        int iter=0;
+        int count = arr.length;
+        for ( String ss : arr) {
+            if (ss.isEmpty())
+            {
+                continue;
+            }
+            
+            final int cindex = iter;
+            RoundButton btn = new RoundButton(ss, 5);
+            btn.setAlignmentX(JComponent.CENTER_ALIGNMENT);
+            btn.setBackground(Color.WHITE);
+            btn.setCursor(new Cursor(Cursor.HAND_CURSOR));
+            btn.addActionListener(new ActionListener()
+            {
+                private int index;
+                @Override
+                public void actionPerformed(ActionEvent e)
+                {
+                    Object source = e.getSource();
+                    index = cindex;
+                    currentIndex = index;
+                    dis(cindex, windowSize);
+                }
+            });
+            btn.setVisible(true);
+            System.out.println(ss);
+            if (iter==0)
+            {
+                WordsPanel.add(Box.createHorizontalGlue());
+            }
+            else
+            {
+                WordsPanel.add(Box.createRigidArea(new Dimension(5,0)));
+            }
+            WordsPanel.add(btn);
+            if (iter==count-1)
+            {
+                WordsPanel.add(Box.createHorizontalGlue());
+            }
+
+            WordBtns.add(btn);
+            
+            iter++;
+        }
+        WordsPanel.repaint();
+        WordsPanel.revalidate();
+    }
 
     // Variables declaration - do not modify    
     private javax.swing.JLabel Definition;
@@ -320,6 +416,7 @@ public class GUIJFrame extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField2;
     private Manager manager = null;
     private javax.swing.JPanel WordsPanel;
+    private javax.swing.JComboBox<Integer> WindowSize;
     // End of variables declaration                   
 
     public javax.swing.JButton getContinueBtn() {
@@ -356,81 +453,13 @@ public class GUIJFrame extends javax.swing.JFrame {
     }
     
     private String inputTextValue = "";
+    private Integer currentIndex = null;
 
     public void setPhrase(String inputText)
     {
         final int windowSize = 3;
         inputTextValue = inputText;
-        String[] arr = inputText.split(" ");    
-        WordBtns.clear();
-        
-        Definition.setText("");
-        WordsPanel.removeAll();
-        int iter=0;
-        int count = arr.length;
-        for ( String ss : arr) {
-            if (ss.isEmpty())
-            {
-                continue;
-            }
-            
-            final int cindex = iter;
-            RoundButton btn = new RoundButton(ss, 5);
-            btn.setAlignmentX(JComponent.CENTER_ALIGNMENT);
-            btn.setBackground(Color.WHITE);
-            btn.setCursor(new Cursor(Cursor.HAND_CURSOR));
-            btn.addActionListener(new ActionListener()
-            {
-                private int index;
-                @Override
-                public void actionPerformed(ActionEvent e)
-                {
-                    Object source = e.getSource();
-                    if (source instanceof RoundButton) {
-                        // reset all
-                        int i=0;
-                        for (RoundButton b:WordBtns)
-                        {
-                            b.setFocusPainted(false);
-                            b.setBackground(Color.WHITE);
-                            if (i>=cindex-(windowSize/2) && i<=cindex+(windowSize/2))
-                            {
-                                b.setBackground(Color.YELLOW);
-                            }
-                            i++;
-                        }
-                        RoundButton btn_this = (RoundButton)source;
-                        btn_this.setBackground(Color.CYAN);
-                    }
-                    index=cindex;
-                    String butSrcTxt = e.getActionCommand();
-                    String definition = manager.disambiguation(inputTextValue, index, windowSize);
-                    Definition.setText(definition);
-                    Definition.setVisible(true);
-                }
-            });
-            btn.setVisible(true);
-            System.out.println(ss);
-            if (iter==0)
-            {
-                WordsPanel.add(Box.createHorizontalGlue());
-            }
-            else
-            {
-                WordsPanel.add(Box.createRigidArea(new Dimension(5,0)));
-            }
-            WordsPanel.add(btn);
-            if (iter==count-1)
-            {
-                WordsPanel.add(Box.createHorizontalGlue());
-            }
-
-            WordBtns.add(btn);
-            
-            iter++;
-        }
-        WordsPanel.repaint();
-        WordsPanel.revalidate();
+        performDisamb(inputTextValue, windowSize);
     }
 
     public javax.swing.JLabel getDefinition() {

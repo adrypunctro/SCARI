@@ -61,6 +61,7 @@ public class GUIFrameLocked extends javax.swing.JFrame {
         WordBtn5 = new javax.swing.JButton();
         WordBtn6 = new javax.swing.JButton();
         BackBtn1 = new javax.swing.JButton();
+        WindowSize = new javax.swing.JComboBox<>();
 
         TopBar.setBackground(new java.awt.Color(0, 0, 0));
 
@@ -398,6 +399,8 @@ public class GUIFrameLocked extends javax.swing.JFrame {
             }
         });
 
+        WindowSize.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
         javax.swing.GroupLayout Step2Pannel1Layout = new javax.swing.GroupLayout(Step2Pannel1);
         Step2Pannel1.setLayout(Step2Pannel1Layout);
         Step2Pannel1Layout.setHorizontalGroup(
@@ -413,8 +416,10 @@ public class GUIFrameLocked extends javax.swing.JFrame {
                         .addComponent(WordBtn6))
                     .addGroup(Step2Pannel1Layout.createSequentialGroup()
                         .addGap(142, 142, 142)
-                        .addComponent(BackBtn1)))
-                .addContainerGap(125, Short.MAX_VALUE))
+                        .addComponent(BackBtn1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(WindowSize, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(107, Short.MAX_VALUE))
         );
         Step2Pannel1Layout.setVerticalGroup(
             Step2Pannel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -425,7 +430,9 @@ public class GUIFrameLocked extends javax.swing.JFrame {
                     .addComponent(WordBtn5)
                     .addComponent(WordBtn6))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(BackBtn1)
+                .addGroup(Step2Pannel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(BackBtn1)
+                    .addComponent(WindowSize, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -590,6 +597,7 @@ public class GUIFrameLocked extends javax.swing.JFrame {
     private javax.swing.JPanel TopBar1;
     private javax.swing.JPanel VoicePanel;
     private javax.swing.JPanel VoicePanel1;
+    private javax.swing.JComboBox<String> WindowSize;
     private javax.swing.JButton WordBtn1;
     private javax.swing.JButton WordBtn2;
     private javax.swing.JButton WordBtn3;
