@@ -5,6 +5,7 @@
  */
 package main;
 
+import system.Manager;
 import gui.GUIJFrame;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -55,6 +56,7 @@ public class Main {
             @Override
             public void actionPerformed(ActionEvent e)
             {
+                gui.getDefinition().setText("");
                 gui.hideStep2();
                 gui.showStep1();
             }

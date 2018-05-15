@@ -6,7 +6,10 @@
 package gui;
 
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Insets;
 import java.awt.Toolkit;
@@ -18,8 +21,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.imageio.ImageIO;
+import javax.swing.Box;
+import javax.swing.BoxLayout;
+import javax.swing.JComponent;
 import javax.swing.border.EmptyBorder;
-import main.Manager;
+import system.Config;
+import system.Manager;
 
 /**
  *
@@ -46,14 +53,14 @@ public class GUIJFrame extends javax.swing.JFrame {
         BufferedImage bgImage = null;
         BufferedImage voiceImage = null;
         try {
-            bgImage = ImageIO.read(new File("C:\\Users\\ASimionescu\\Documents\\NetBeansProjects\\SCARI\\WordSenseDisambiguation18\\src\\assets\\img\\hero_medium.jpg"));
-            voiceImage = ImageIO.read(new File("C:\\Users\\ASimionescu\\Documents\\NetBeansProjects\\SCARI\\WordSenseDisambiguation18\\src\\assets\\img\\wave_form_medium.png"));
+            bgImage = ImageIO.read(new File(Config.ROOT+"\\src\\assets\\img\\hero_medium.jpg"));
+            voiceImage = ImageIO.read(new File(Config.ROOT+"\\src\\assets\\img\\wave_form_medium.png"));
         } catch (IOException e) {
             System.out.println("Image read failed!");
         }
         
-        
-        BackgroundPanel1 = new ImagePanel(900, 400);
+        Definition = new javax.swing.JLabel("");
+        BackgroundPanel1 = new ImagePanel(900, 430);
         VoicePanel1 = new ImagePanel(900, 100);
         TopBar1 = new javax.swing.JPanel();
         ResultPanel1 = new javax.swing.JPanel();
@@ -72,11 +79,17 @@ public class GUIJFrame extends javax.swing.JFrame {
         BackBtn1 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         WordBtns = new ArrayList<>();
-
+        ContinueBtn1.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        BackBtn1.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        
         TitleText1.setForeground(new java.awt.Color(220, 220, 220));
         TitleText1.setText("Word Sense Disambiguation");
         TitleText1.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
         TitleText1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        
+        Definition.setForeground(Color.YELLOW);
+        Definition.setFont(new java.awt.Font("Dialog", Font.ITALIC, 18)); // NOI18N
+        Definition.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         
         BackgroundPanel1.changePic(bgImage);
         VoicePanel1.setOpaque(false);
@@ -97,8 +110,6 @@ public class GUIJFrame extends javax.swing.JFrame {
             TopBar1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 43, Short.MAX_VALUE)
         );
-
-        BackgroundPanel1.setBackground(new java.awt.Color(204, 0, 255));
 
         //ResultPanel1.setBackground(new java.awt.Color(255, 255, 255));
         ResultPanel1.setOpaque(false);
@@ -164,15 +175,9 @@ public class GUIJFrame extends javax.swing.JFrame {
         javax.swing.GroupLayout Step1Panel1Layout = new javax.swing.GroupLayout(Step1Panel1);
         Step1Panel1.setLayout(Step1Panel1Layout);
         Step1Panel1Layout.setHorizontalGroup(
-            Step1Panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(Step1Panel1Layout.createSequentialGroup()
-                .addContainerGap()
+            Step1Panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                 .addComponent(jTextField2)
-                .addContainerGap())
-            .addGroup(Step1Panel1Layout.createSequentialGroup()
-                .addGap(86, 86, 86)
                 .addComponent(ContinueBtn1)
-                .addContainerGap(93, Short.MAX_VALUE))
         );
         Step1Panel1Layout.setVerticalGroup(
             Step1Panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -189,14 +194,13 @@ public class GUIJFrame extends javax.swing.JFrame {
         javax.swing.GroupLayout Step2Pannel1Layout = new javax.swing.GroupLayout(Step2Pannel1);
         Step2Pannel1.setLayout(Step2Pannel1Layout);
         Step2Pannel1Layout.setHorizontalGroup(
-            Step2Pannel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            Step2Pannel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
             .addGroup(Step2Pannel1Layout.createSequentialGroup()
-                .addGroup(Step2Pannel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(Step2Pannel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addGroup(Step2Pannel1Layout.createSequentialGroup()
                         .addComponent(WordsPanel)
                         )
                     .addGroup(Step2Pannel1Layout.createSequentialGroup()
-                        .addGap(142, 142, 142)
                         .addComponent(BackBtn1)))
                 .addContainerGap(125, Short.MAX_VALUE))
         );
@@ -213,21 +217,10 @@ public class GUIJFrame extends javax.swing.JFrame {
         );
         
         WordsPanel.setPreferredSize(new Dimension(600, 30));
-        WordsPanel.setLayout(new GridLayout(1, 0));
         WordsPanel.setOpaque(false);
-
-        WordBtn4.setText("jButton2");
-
-        WordBtn5.setText("jButton3");
-
-        WordBtn6.setText("jButton4");
+        WordsPanel.setLayout(new BoxLayout(WordsPanel, BoxLayout.LINE_AXIS));
 
         BackBtn1.setText("Back");
-        BackBtn1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BackBtn1ActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout ContentPanel1Layout = new javax.swing.GroupLayout(ContentPanel1);
         ContentPanel1.setLayout(ContentPanel1Layout);
@@ -259,53 +252,38 @@ public class GUIJFrame extends javax.swing.JFrame {
                 .addGroup(BackgroundPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(ContentPanel1, 900, 900, 900)
                     .addComponent(TitlePanel1, 900, 900, 900)
+                    .addComponent(Definition, 900, 900, 900)   
                     .addComponent(VoicePanel1, 900, 900, 900))
                 )
         );
         BackgroundPanel1Layout.setVerticalGroup(
             BackgroundPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, BackgroundPanel1Layout.createSequentialGroup()
-                .addComponent(TitlePanel1, 100, 100, 100)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addGroup(javax.swing.GroupLayout.Alignment.CENTER, BackgroundPanel1Layout.createSequentialGroup()
+                .addComponent(TitlePanel1, 60, 60, 60)
+                .addGap(5, 5, 5)
+                .addComponent(Definition, 40, 40, 40)
+                .addGap(5, 5, 5) 
                 .addComponent(ContentPanel1, 160, 160, 160)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(5, 5, 5) 
                 .addComponent(VoicePanel1, 100, 100, 100)
                 .addGap(40,40,40)
                 )
         );
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addGap(1, 1, 1)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(BackgroundPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    )
-                .addGap(1, 1, 1))
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(1, 1, 1)
-                .addComponent(BackgroundPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(1, 1, 1))
-        );
-
+        
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(BackgroundPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     ))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(BackgroundPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     ))
         );
         
@@ -319,51 +297,9 @@ public class GUIJFrame extends javax.swing.JFrame {
     
     }// </editor-fold>                        
 
-    private void BackBtnActionPerformed(java.awt.event.ActionEvent evt) {                                        
-        // TODO add your handling code here:
-    }                                       
 
-    private void BackBtn1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
-        // TODO add your handling code here:
-    }                                        
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(GUIFrameLocked.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(GUIFrameLocked.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(GUIFrameLocked.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(GUIFrameLocked.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new GUIFrameLocked().setVisible(true);
-            }
-        });
-    }
-
-    // Variables declaration - do not modify                     
+    // Variables declaration - do not modify    
+    private javax.swing.JLabel Definition;
     private javax.swing.JButton BackBtn1;
     private ImagePanel BackgroundPanel1;
     private javax.swing.JPanel ContentPanel1;
@@ -427,14 +363,21 @@ public class GUIJFrame extends javax.swing.JFrame {
         String[] arr = inputText.split(" ");    
         WordBtns.clear();
         
+        Definition.setText("");
         WordsPanel.removeAll();
-        int count=0;
+        int iter=0;
+        int count = arr.length;
         for ( String ss : arr) {
-            final int cindex = count;
-            count++;
+            if (ss.isEmpty())
+            {
+                continue;
+            }
+            
+            final int cindex = iter;
             RoundButton btn = new RoundButton(ss, 5);
-            btn.setBorder( new EmptyBorder(1, 1, 1, 1) );
-            btn.setMargin( new Insets(1, 1, 1, 1) );
+            btn.setAlignmentX(JComponent.CENTER_ALIGNMENT);
+            btn.setBackground(Color.WHITE);
+            btn.setCursor(new Cursor(Cursor.HAND_CURSOR));
             btn.addActionListener(new ActionListener()
             {
                 private int index;
@@ -447,23 +390,44 @@ public class GUIJFrame extends javax.swing.JFrame {
                         for (RoundButton b:WordBtns)
                         {
                             b.setFocusPainted(false);
+                            b.setBackground(Color.WHITE);
                         }
                         RoundButton btn_this = (RoundButton)source;
-                        btn_this.setFocusPainted(true);
+                        btn_this.setBackground(Color.YELLOW);
                     }
                     index=cindex;
                     String butSrcTxt = e.getActionCommand();
                     String definition = manager.disambiguation(inputTextValue, index);
-                    System.out.println(butSrcTxt+": def. "+definition);
+                    Definition.setText(definition);
+                    Definition.setVisible(true);
                 }
             });
             btn.setVisible(true);
             System.out.println(ss);
-            WordBtns.add(btn);
+            if (iter==0)
+            {
+                WordsPanel.add(Box.createHorizontalGlue());
+            }
+            else
+            {
+                WordsPanel.add(Box.createRigidArea(new Dimension(5,0)));
+            }
             WordsPanel.add(btn);
+            if (iter==count-1)
+            {
+                WordsPanel.add(Box.createHorizontalGlue());
+            }
+
+            WordBtns.add(btn);
+            
+            iter++;
         }
         WordsPanel.repaint();
         WordsPanel.revalidate();
+    }
+
+    public javax.swing.JLabel getDefinition() {
+        return Definition;
     }
     
 }

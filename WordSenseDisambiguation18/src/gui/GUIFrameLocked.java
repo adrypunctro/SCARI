@@ -332,7 +332,7 @@ public class GUIFrameLocked extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        TitleText1.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
+        TitleText1.setFont(new java.awt.Font("Dialog", 3, 36)); // NOI18N
         TitleText1.setForeground(new java.awt.Color(204, 204, 204));
         TitleText1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         TitleText1.setText("jLabel1");
