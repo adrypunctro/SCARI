@@ -61,7 +61,7 @@ public class Manager
 //        for (String s : contexts)
 //            System.out.println(s + "------------------------------");
         //trier.testFile("interest2");
-        String[] alternativeForms=null;
+        String[] alternativeForms={};
         String[] split = context.split(" ");
         String disambiguateWord = trier.disambiguateWord(split[targetIndex], context, alternativeForms, windowSize);
         return disambiguateWord;
