@@ -195,8 +195,13 @@ public class TryStuff {
 
     public String disambiguateWord(String word, String context, String[] alternativeForms)
     {
+        return disambiguateWord(word, context, alternativeForms, 3);
+    }
+    
+    public String disambiguateWord(String word, String context, String[] alternativeForms, int windowSize)
+    {
         Disambiguate d = new Disambiguate("date.txt", "raport.txt");
-        d.setParameters(word, SynsetType.NOUN, context, 3);
+        d.setParameters(word, SynsetType.NOUN, context, windowSize);
         d.setAlternativeForms(alternativeForms);
         d.setUseOnlySamePos(true);
         d.disambiguate();

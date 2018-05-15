@@ -27,7 +27,7 @@ public class Manager
      * @param targetIndex The index of target word
      * @return The definition of the word 
      */
-    public String disambiguation(String context, int targetIndex)
+    public String disambiguation(String context, int targetIndex, int windowSize)
     {
         System.out.println("Context: "+context+" | Index: "+targetIndex);
         // TODO: magie
@@ -63,7 +63,7 @@ public class Manager
         //trier.testFile("interest2");
         String[] alternativeForms=null;
         String[] split = context.split(" ");
-        String disambiguateWord = trier.disambiguateWord(split[targetIndex], context, alternativeForms);
+        String disambiguateWord = trier.disambiguateWord(split[targetIndex], context, alternativeForms, windowSize);
         return disambiguateWord;
     }
 }

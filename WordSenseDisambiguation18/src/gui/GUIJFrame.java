@@ -359,6 +359,7 @@ public class GUIJFrame extends javax.swing.JFrame {
 
     public void setPhrase(String inputText)
     {
+        final int windowSize = 3;
         inputTextValue = inputText;
         String[] arr = inputText.split(" ");    
         WordBtns.clear();
@@ -387,17 +388,23 @@ public class GUIJFrame extends javax.swing.JFrame {
                     Object source = e.getSource();
                     if (source instanceof RoundButton) {
                         // reset all
+                        int i=0;
                         for (RoundButton b:WordBtns)
                         {
                             b.setFocusPainted(false);
                             b.setBackground(Color.WHITE);
+                            if (i>=cindex-(windowSize/2) && i<=cindex+(windowSize/2))
+                            {
+                                b.setBackground(Color.YELLOW);
+                            }
+                            i++;
                         }
                         RoundButton btn_this = (RoundButton)source;
-                        btn_this.setBackground(Color.YELLOW);
+                        btn_this.setBackground(Color.CYAN);
                     }
                     index=cindex;
                     String butSrcTxt = e.getActionCommand();
-                    String definition = manager.disambiguation(inputTextValue, index);
+                    String definition = manager.disambiguation(inputTextValue, index, windowSize);
                     Definition.setText(definition);
                     Definition.setVisible(true);
                 }
