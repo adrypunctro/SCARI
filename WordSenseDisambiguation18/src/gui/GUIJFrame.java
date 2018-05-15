@@ -25,8 +25,8 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JComponent;
 import javax.swing.border.EmptyBorder;
-import system.Config;
-import system.Manager;
+import main.Settings;
+import main.Manager;
 
 /**
  *
@@ -53,8 +53,8 @@ public class GUIJFrame extends javax.swing.JFrame {
         BufferedImage bgImage = null;
         BufferedImage voiceImage = null;
         try {
-            bgImage = ImageIO.read(new File(Config.ROOT+"\\src\\assets\\img\\hero_medium.jpg"));
-            voiceImage = ImageIO.read(new File(Config.ROOT+"\\src\\assets\\img\\wave_form_medium.png"));
+            bgImage = ImageIO.read(new File(Settings.ROOT+"src\\assets\\img\\hero_medium.jpg"));
+            voiceImage = ImageIO.read(new File(Settings.ROOT+"src\\assets\\img\\wave_form_medium.png"));
         } catch (IOException e) {
             System.out.println("Image read failed!");
         }

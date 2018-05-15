@@ -5,7 +5,6 @@
  */
 package main;
 
-import system.Manager;
 import gui.GUIJFrame;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

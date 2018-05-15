@@ -1,0 +1,13 @@
+DISAMBIGUATING word: sweet
+from context: Home sweet home
+SENSES SCORES:
+20.0 English phonetician; one of the founders of modern phonetics (1845-1912)
+121.0 a dish served as the last course of a meal
+83.0 a food rich in sugar
+0.0 the taste experience when sugar dissolves in the mouth
+2.0 the property of tasting as if it contains sugar
+BEST SCORE: 
+a dish served as the last course of a meal
+
+
+-----end of report file-----
