@@ -10,5 +10,5 @@ package main;
  * @author ASimionescu
  */
 public class Settings {
-    public static final String ROOT = "C:\\Users\\ASimionescu\\Documents\\NetBeansProjects\\SCARI\\WordSenseDisambiguation18\\";
+    public static final String ROOT = "D:\\i am vadry\\SCARI\\WordSenseDisambiguation18\\";
 }

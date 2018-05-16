@@ -222,7 +222,8 @@ public class GUIJFrame extends javax.swing.JFrame {
                 .addContainerGap())
         );
         
-        WindowSize.setModel(new javax.swing.DefaultComboBoxModel<>(new Integer[] { 3, 5, 7, 9 }));
+        WindowSize.setModel(new javax.swing.DefaultComboBoxModel<>(new Integer[] { 1, 2, 3, 4, 5, 6, 7, 8, 9 }));
+        WindowSize.setSelectedItem(3);
         WindowSize.addActionListener (new ActionListener () {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -325,7 +326,7 @@ public class GUIJFrame extends javax.swing.JFrame {
         {
             b.setFocusPainted(false);
             b.setBackground(Color.WHITE);
-            if (i>=index-(windowSize/2) && i<=index+(windowSize/2))
+            if (i>=index-windowSize && i<=index+windowSize)
             {
                 b.setBackground(Color.YELLOW);
             }
@@ -457,9 +458,9 @@ public class GUIJFrame extends javax.swing.JFrame {
 
     public void setPhrase(String inputText)
     {
-        final int windowSize = 3;
+        Integer winSize = (Integer)WindowSize.getSelectedItem();
         inputTextValue = inputText;
-        performDisamb(inputTextValue, windowSize);
+        performDisamb(inputTextValue, winSize);
     }
 
     public javax.swing.JLabel getDefinition() {
